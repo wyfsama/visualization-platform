@@ -38,7 +38,7 @@ export default {
   methods: {
     async initChart() {
       this.chartInstance = this.$echarts.init(this.$refs.map_ref, this.theme)
-      const map = await axios.get('/static/map/china.json', {
+      const map = await axios.get('/visualization-platform/dist/static/map/china.json', {
         baseURL: '',
       })
       console.log(map)
