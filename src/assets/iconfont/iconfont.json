@@ -1,0 +1,58 @@
+{
+  "id": "2603145",
+  "name": "echarts",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6207769",
+      "name": "返回",
+      "font_class": "ziyuanldpi",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "7533293",
+      "name": "主题",
+      "font_class": "zhuti",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "20620724",
+      "name": "icon_zuo",
+      "font_class": "icon_zuo",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "3216106",
+      "name": "放大",
+      "font_class": "icon--2",
+      "unicode": "e725",
+      "unicode_decimal": 59173
+    },
+    {
+      "icon_id": "3216107",
+      "name": "缩小",
+      "font_class": "icon--3",
+      "unicode": "e726",
+      "unicode_decimal": 59174
+    },
+    {
+      "icon_id": "18397763",
+      "name": "下",
+      "font_class": "down-01",
+      "unicode": "e6f0",
+      "unicode_decimal": 59120
+    },
+    {
+      "icon_id": "2325943",
+      "name": "向下",
+      "font_class": "xiangxia",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    }
+  ]
+}

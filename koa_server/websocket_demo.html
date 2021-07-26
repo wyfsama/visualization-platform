@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <button id="connect">连接</button>
+    <button id="send" disabled>发送</button>
+    <br /> -->
+    从服务端接受的数据如下：<br />
+    <span id="recv"></span>
+    <script>
+      let ws = null;
+      ws = new WebSocket("ws://localhost:7788");
+    //   send.disabled = false;
+      ws.onopen = () => {
+        console.log("连接成功");
+      };
+      ws.onclose = () => {
+        console.log("连接失败");
+        send.disabled = true;
+      };
+    //   ws.send(
+    //     JSON.stringify({
+    //       action: "nihao",
+    //       socketType: "fu",
+    //       chartName: "trend",
+    //       value: true,
+    //     })
+    //   )
+      ws.onmessage = (msg) => {
+        console.log(msg);
+        recv.innerHTML = msg.data;
+      };
+
+      
+    </script>
+  </body>
+</html>
