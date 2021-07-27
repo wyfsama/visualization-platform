@@ -13,9 +13,12 @@ app.use(header)
 const data = require('./middleware/koa_response_data')
 app.use(data)
 // 监听1111端口，成功返回ok
-app.listen(1111, function () {
-    console.log('ok');
-})
+var port = process.env.PORT || 3000
+
+app.listen(port, function () {
+  console.log("Listening on " + port)
+
+});
 
 // const WebSocketServer = require('./service/web_socket_service')
 // WebSocketServer.listen()
