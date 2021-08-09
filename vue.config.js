@@ -5,5 +5,13 @@ module.exports = {
   },
   publicPath: process.env.NODE_ENV === 'production'
     ? '/visualization-platform/dist'
-    : '/'
+    : '/',
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title = 'visualization-platform_在线大屏可视化'
+        return args
+      })
+  }
 }
