@@ -16,6 +16,10 @@ export default {
       allData: null,
       provData: {},
       initOption: null,
+      seriesArr: null,
+      isShowEffect: true,
+      // 是否配置到github
+      isGithub: true,
     }
   },
   mounted() {
@@ -26,6 +30,9 @@ export default {
   },
   computed: {
     ...mapState(['theme']),
+    ENV() {
+      return this.isGithub ? '/visualization-platform/dist' : ''
+    },
   },
   watch: {
     theme() {
@@ -38,7 +45,7 @@ export default {
   methods: {
     async initChart() {
       this.chartInstance = this.$echarts.init(this.$refs.map_ref, this.theme)
-      const map = await axios.get('/visualization-platform/dist/static/map/china.json', {
+      const map = await axios.get(this.ENV + '/static/map/china.json', {
         baseURL: '',
       })
       console.log(map)
@@ -78,25 +85,31 @@ export default {
       this.chartInstance.on('click', async (e) => {
         const provCname = e.name
         const { key, path } = getProvinceMapInfo(provCname)
-        const provMap = await axios.get('http://localhost:2222' + path)
+        console.log(path)
+        // 获取各省城市地图
+        const provMap = await axios.get(this.ENV + path, {
+          baseURL: '',
+        })
         console.log(provMap.data)
         this.provData[key] = provMap.data
         this.$echarts.registerMap(key, provMap.data)
         const changeOption = {
           ...this.initOption,
+          legend: {
+            show: false,
+          },
           geo: {
             type: 'map',
             // geoIndex: 0,
             map: key,
           },
-          series: [
-            {
-              animation: false,
-            },
-          ],
         }
-        // this.chartInstance.clear()
+
         this.chartInstance.setOption(changeOption)
+        this.isShowEffect = false
+        this.updateChart()
+        console.log(this.chartInstance.getOption())
+        // console.log(this.allData)
       })
     },
     async getData() {
@@ -106,10 +119,10 @@ export default {
       this.updateChart()
     },
     updateChart() {
-      const seriesArr = this.allData.map((item) => {
+      this.seriesArr = this.allData.map((item) => {
         return {
           type: 'effectScatter',
-          zlevel: 1,
+          zlevel: 0,
           // geoIndex: 0,
           clip: true,
           name: item.name,
@@ -119,11 +132,13 @@ export default {
             scale: 5,
             brushType: 'stroke',
           },
+          symbolSize: this.isShowEffect ? 10 : 0,
         }
       })
+      console.log(this.seriesArr)
       const legendArr = this.allData.map((item) => item.name)
       const dataOption = {
-        series: seriesArr,
+        series: this.seriesArr,
         legend: {
           legendArr,
         },
@@ -152,8 +167,13 @@ export default {
         geo: {
           map: 'china',
         },
+        legend: {
+          show: true,
+        },
       }
       this.chartInstance.setOption(revertOption)
+      this.isShowEffect = true
+      this.updateChart()
     },
   },
 }
